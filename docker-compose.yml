@@ -50,7 +50,10 @@ services:
       MYSQL_USER: laravel
       MYSQL_PASSWORD: laravelpassword
     volumes:
-      - db_data:/var/lib/mysql
+      - ./db_data:/var/lib/mysql
+    ports: 
+      - "33070:3306"  # Expose MySQL on port 3306
+
     networks:
       - my_network
 
