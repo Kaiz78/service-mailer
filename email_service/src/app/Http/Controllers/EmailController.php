@@ -49,13 +49,12 @@ class EmailController extends Controller
         $channel->queue_declare('email_queue', false, true, false, false);
 
         
-        // créer 10000 datas
+        // créer 1 datas
         $data = json_encode($request->all());
 
-        for ($i = 0; $i < 1000; $i++) {
-            $msg = new AMQPMessage($data, array('delivery_mode' => 2));
-            $channel->basic_publish($msg, '', 'email_queue');
-        }
+        $msg = new AMQPMessage($data, array('delivery_mode' => 2));
+        $channel->basic_publish($msg, '', 'email_queue');
+    
         $channel->close();
         $connection->close();
 
